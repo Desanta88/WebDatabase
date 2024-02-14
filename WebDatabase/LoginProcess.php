@@ -5,6 +5,7 @@
     </head>
     <body>
         <?php
+            session_start();
             $username=$_GET["user"];
             $password=$_GET["pass"];
             $hash=sha1($password);
@@ -18,10 +19,12 @@
             $data=$statement->fetchAll();
     
             if(empty($data)==false){
+                $_SESSION["User"]=$username;
+                $_SESSION["pass"]=$password;
                 header("location:/WebDatabase/home.html");
             }
             else
-                header("location:/WebDatabase/index.html");
+                echo "username o password non corretti";
                 
         ?>
         <!--<script>
