@@ -6,7 +6,7 @@
     </head>
     <body style="background-color:#f0f8ff">
         <table align="center" style="width:70%" class="table">
-            <tr>
+            <tr style="text-align:center">
                 <th>Id</th>
                 <th>Username</th>
                 <th>Videogame</th>

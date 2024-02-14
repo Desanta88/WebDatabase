@@ -14,27 +14,27 @@
                 <th>TimesSpeedrunned</th>
             </tr>
             <?php
-        $server="localhost";
-        $username="programma";
-        $password="12345";
-        $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query="SELECT * FROM videogame;";
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT * FROM videogame;";
 
-        $statement=$connection->prepare($query);
-        $statement->execute();
-        $data=$statement->fetchAll();
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
 
-        foreach($data as $row){
-            echo "<tr style='text-align:center'>";
-            echo "<td>".$row["Id"]."</td>";
-            echo "<td>".$row["Title"]."</td>";
-            echo "<td>".$row["Publisher"]."</td>";
-            echo "<td>".$row["PublishingYear"]."</td>";
-            echo "<td>".$row["TimesSpeedrunned"]."</td>";
-            echo "</tr>";
-        }
-        ?>
+                foreach($data as $row){
+                    echo "<tr style='text-align:center'>";
+                    echo "<td>".$row["Id"]."</td>";
+                    echo "<td>".$row["Title"]."</td>";
+                    echo "<td>".$row["Publisher"]."</td>";
+                    echo "<td>".$row["PublishingYear"]."</td>";
+                    echo "<td>".$row["TimesSpeedrunned"]."</td>";
+                    echo "</tr>";
+                }
+            ?>
         </table>
         <br><br><br><br>
         Filter by the publisher and publishing year
@@ -55,12 +55,40 @@
                     echo "<option>".$rows["Publisher"]."</option>";
                 }
                 echo "</select>";
-
-
             ?>
             <br><br>
             Input a year:<input type="text" name="year"><br><br>
             <button type="b" class="btn btn-primary">Filter</button>
+        </form><br><br><br>
+        <form action="DeleteUpdate.php">
+            
+            
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT DISTINCT videogame.Title FROM videogame;";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+
+                echo "Inserire il gioco da cancellare:<select name=VideogameD>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Title"]."</option>";
+                }
+                echo "</select>     ";
+                echo "<button class='btn btn-primary'>Cancella</button><br><br>";
+                echo "Modifica di un gioco<br>";
+                echo "<select name=VideogameU>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Title"]."</option>";
+                }
+                echo "</select>     ";
+                
+            ?>
         </form>
+
     </body>
 </html>
