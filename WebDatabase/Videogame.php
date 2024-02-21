@@ -45,14 +45,14 @@
                 $password="12345";
                 $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query="SELECT DISTINCT videogame.Publisher FROM videogame;";
+                $query="SELECT DISTINCT editor.Name,videogame.Title FROM videogame JOIN editor ON videogame.Publisher=editor.Id;";
                 $statement=$connection->prepare($query);
                 $statement->execute();
                 $data=$statement->fetchAll();
 
                 echo "<select name=company>";
                 foreach($data as $rows){
-                    echo "<option>".$rows["Publisher"]."</option>";
+                    echo "<option>".$rows["Name"]."</option>";
                 }
                 echo "</select>";
             ?>
@@ -60,9 +60,17 @@
             Input a year:<input type="text" name="year"><br><br>
             <button type="b" class="btn btn-primary">Filter</button>
         </form><br><br><br>
-        <form action="DeleteUpdate.php">
-            
-            
+        <form action="/WebDatabase/Videogame.php" method="get">
+            <?php
+                echo "Inserire il gioco da cancellare:<br>";
+                echo "<select name=VideogameD>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Title"]."</option>";
+                }
+            ?>
+            <button class='btn btn-primary'>Cancella</button><br><br>
+        </form>
+        <form action="AddUpdate.php">
             <?php
                 $server="localhost";
                 $username="programma";
@@ -74,19 +82,15 @@
                 $statement->execute();
                 $data=$statement->fetchAll();
 
-                echo "Inserire il gioco da cancellare:<select name=VideogameD>";
-                foreach($data as $rows){
-                    echo "<option>".$rows["Title"]."</option>";
-                }
-                echo "</select>     ";
-                echo "<button class='btn btn-primary'>Cancella</button><br><br>";
-                echo "Modifica di un gioco<br>";
+                echo "<button class='btn btn-primary>Modifica</button><br><br>";
+                /*echo "Modifica di un gioco<br>";
                 echo "<select name=VideogameU>";
                 foreach($data as $rows){
                     echo "<option>".$rows["Title"]."</option>";
                 }
                 echo "</select>     ";
-                
+                echo "<button class='btn btn-primary>Modifica</button><br><br>";
+                echo "<button class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";*/
             ?>
         </form>
 
