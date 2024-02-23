@@ -1,6 +1,6 @@
 <html>
     <head >
-        <title>Speedrunner</title>
+        <title>Videogame</title>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     </head>
@@ -60,17 +60,18 @@
             Input a year:<input type="text" name="year"><br><br>
             <button type="b" class="btn btn-primary">Filter</button>
         </form><br><br><br>
-        <form action="/WebDatabase/Videogame.php" method="get">
+        <form action="/WebDatabase/Delete.php" method="get">
             <?php
-                echo "Inserire il gioco da cancellare:<br>";
+                echo "Scegliere il gioco da cancellare:<br>";
                 echo "<select name=VideogameD>";
                 foreach($data as $rows){
                     echo "<option>".$rows["Title"]."</option>";
                 }
+                echo "</select>";
             ?>
             <button class='btn btn-primary'>Cancella</button><br><br>
         </form>
-        <form action="AddUpdate.php">
+        <form action="AddUpdate.php" method="get">
             <?php
                 $server="localhost";
                 $username="programma";
@@ -82,15 +83,14 @@
                 $statement->execute();
                 $data=$statement->fetchAll();
 
-                echo "<button class='btn btn-primary>Modifica</button><br><br>";
-                /*echo "Modifica di un gioco<br>";
+                echo "Modifica di un gioco<br>";
                 echo "<select name=VideogameU>";
                 foreach($data as $rows){
                     echo "<option>".$rows["Title"]."</option>";
                 }
                 echo "</select>     ";
-                echo "<button class='btn btn-primary>Modifica</button><br><br>";
-                echo "<button class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";*/
+                echo "<button type='b' class='btn btn-primary'>Modifica</button><br><br>";
+                echo "<button type='b' class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";
             ?>
         </form>
 
