@@ -19,7 +19,7 @@
                 $password="12345";
                 $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query="SELECT * FROM videogame;";
+                $query="SELECT v.Id,v.Title,e.Name,v.PublishingYear,v.TimesSpeedrunned FROM videogame v JOIN editor e ON v.Publisher=e.Id;";
 
                 $statement=$connection->prepare($query);
                 $statement->execute();
@@ -29,7 +29,7 @@
                     echo "<tr style='text-align:center'>";
                     echo "<td>".$row["Id"]."</td>";
                     echo "<td>".$row["Title"]."</td>";
-                    echo "<td>".$row["Publisher"]."</td>";
+                    echo "<td>".$row["Name"]."</td>";
                     echo "<td>".$row["PublishingYear"]."</td>";
                     echo "<td>".$row["TimesSpeedrunned"]."</td>";
                     echo "</tr>";
@@ -71,7 +71,7 @@
             ?>
             <button class='btn btn-primary'>Cancella</button><br><br>
         </form>
-        <form action="AddUpdate.php" method="get">
+        <form action="Update.php" method="get">
             <?php
                 $server="localhost";
                 $username="programma";
@@ -90,7 +90,7 @@
                 }
                 echo "</select>     ";
                 echo "<button type='b' class='btn btn-primary'>Modifica</button><br><br>";
-                echo "<button type='b' class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";
+                echo "<button name='ciao' type='b' class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";
             ?>
         </form>
 
