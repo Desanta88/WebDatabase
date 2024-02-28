@@ -60,7 +60,7 @@
             Input a year:<input type="text" name="year"><br><br>
             <button type="b" class="btn btn-primary">Filter</button>
         </form><br><br><br>
-        <form action="/WebDatabase/Delete.php" method="get">
+        <form action="/WebDatabase/DeleteV.php" method="get">
             <?php
                 echo "Scegliere il gioco da cancellare:<br>";
                 echo "<select name=VideogameD>";
@@ -71,7 +71,7 @@
             ?>
             <button class='btn btn-primary'>Cancella</button><br><br>
         </form>
-        <form action="Update.php" method="get">
+        <form action="UpdateV.php" method="get">
             <?php
                 $server="localhost";
                 $username="programma";
