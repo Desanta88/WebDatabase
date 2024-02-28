@@ -6,17 +6,28 @@
     </head>
     <body style="background-color:#f0f8ff">
         <form action="/WebDatabase/AddProcessV.php" method="get">
+            <div>
+            </div>
             Title:<input type="text" name="title"><br><br>
             <?php
-                echo "<select name=company>";
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT editor.Name FROM editor";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+                echo "Editor:<select name=company>";
                 foreach($data as $rows){
                     echo "<option>".$rows["Name"]."</option>";
                 }
-                echo "</select>";
+                echo "</select><br><br>";
             ?>
             Publishing Year:<input type="text" name="publishingyear"><br><br>
             Times Speedrunned<input type="text" name="timesspeedrunned"><br><br>
-            <button type='b' class='btn btn-primary'>Modifica</button>
+            <button type='b' class='btn btn-primary'>Aggiungi</button>
             
         </form>
     </body>

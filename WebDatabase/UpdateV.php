@@ -7,7 +7,22 @@
     <body style="background-color:#f0f8ff">
         <form action="/WebDatabase/UpdateProcessV.php" method="get">
             Title:<input type="text" name="title"><br><br>
-            Publisher:<input type="text" name="publisher"><br><br>
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT editor.Name FROM editor";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+                echo "Editor:<select name=publisher>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Name"]."</option>";
+                }
+                echo "</select><br><br>";
+            ?>
             Publishing Year:<input type="text" name="publishingyear"><br><br>
             Times Speedrunned<input type="text" name="timesspeedrunned"><br><br>
             <button type='b' class='btn btn-primary'>Modifica</button>

@@ -70,7 +70,48 @@
             <br><br>
             <button type="b" class="btn btn-primary">Filter</button>
         </form>
-    
+        <form action="/WebDatabase/DeleteS.php" method="get">
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT Username FROM speedrunner";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+                echo "Scegliere lo speedrunner da cancellare:<br>";
+                echo "<select name=SpeedrunnerD>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Username"]."</option>";
+                }
+                echo "</select>";
+            ?>
+            <button class='btn btn-primary'>Cancella</button><br><br>
+        </form>
+        <form action="UpdateS.php" method="get">
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT Username FROM speedrunner";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+
+                echo "Modifica di uno speedrunner<br>";
+                echo "<select name=SpeedrunnerU>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Username"]."</option>";
+                }
+                echo "</select>     ";
+                echo "<button type='b' class='btn btn-primary'>Modifica</button><br><br>";
+            ?>
+        </form>
+        <a href="/WebDatabase/AddS.php"><button type='b' class='btn btn-primary'>Aggiungi uno speedrunner</button><br><br></a>
 
     </body>
 </html>

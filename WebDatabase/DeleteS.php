@@ -4,10 +4,10 @@
     $password="12345";
     $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $game=$_GET["VideogameD"];
-    $query="DELETE FROM videogame WHERE Title=:type";
+    $runner=$_GET["SpeedrunnerD"];
+    $query="DELETE FROM speedrunner WHERE Username=:type";
     $statement=$connection->prepare($query);
-    $statement->bindParam(":type",$game,PDO::PARAM_STR);
+    $statement->bindParam(":type",$runner,PDO::PARAM_STR);
     $statement->execute();
-    header("location:/WebDatabase/Videogame.php");
+    header("location:/WebDatabase/Speedrunner.php");
 ?>

@@ -45,7 +45,7 @@
                 $password="12345";
                 $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query="SELECT DISTINCT editor.Name,videogame.Title FROM videogame JOIN editor ON videogame.Publisher=editor.Id;";
+                $query="SELECT editor.Name FROM editor";
                 $statement=$connection->prepare($query);
                 $statement->execute();
                 $data=$statement->fetchAll();
@@ -62,6 +62,15 @@
         </form><br><br><br>
         <form action="/WebDatabase/DeleteV.php" method="get">
             <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT Title FROM videogame";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
                 echo "Scegliere il gioco da cancellare:<br>";
                 echo "<select name=VideogameD>";
                 foreach($data as $rows){
@@ -90,9 +99,8 @@
                 }
                 echo "</select>     ";
                 echo "<button type='b' class='btn btn-primary'>Modifica</button><br><br>";
-                echo "<button name='ciao' type='b' class='btn btn-primary'>Aggiungi un videogioco</button><br><br>";
             ?>
         </form>
-
+        <a href="/WebDatabase/AddV.php"><button name='ciao' type='b' class='btn btn-primary'>Aggiungi un videogioco</button><br><br></a>
     </body>
 </html>

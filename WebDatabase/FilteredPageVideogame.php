@@ -23,7 +23,7 @@
             try{
                 $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query="SELECT * FROM videogame WHERE Publisher=:type";
+                $query="SELECT v.id,v.Title,e.Name,v.PublishingYear,v.TimesSpeedrunned FROM videogame v JOIN editor e ON v.Publisher=e.Id WHERE e.Name=:type";
                 if($publishingYear!=""){
                     $query=$query." AND PublishingYear=:type2";
                     $statement=$connection->prepare($query);
@@ -39,9 +39,9 @@
 
                 foreach($data as $row){
                     echo "<tr style='text-align:center'>";
-                    echo "<td>".$row["Id"]."</td>";
+                    echo "<td>".$row["id"]."</td>";
                     echo "<td>".$row["Title"]."</td>";
-                    echo "<td>".$row["Publisher"]."</td>";
+                    echo "<td>".$row["Name"]."</td>";
                     echo "<td>".$row["PublishingYear"]."</td>";
                     echo "<td>".$row["TimesSpeedrunned"]."</td>";
                     echo "</tr>";
