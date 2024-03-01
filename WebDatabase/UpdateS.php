@@ -9,7 +9,7 @@
             Username:<input type="text" name="username"><br><br>
             Nationality:<input type="text" name="nationality"><br><br>
             Gender:<input type="text" name="gender"><br><br>
-            Total Speedruns<input type="text" name="totalspeedruns"><br><br>
+            Total Speedruns:<input type="text" name="totalspeedruns"><br><br>
             <button type='b' class='btn btn-primary'>Modifica</button>
             <?php
                 $s=$_GET["SpeedrunnerU"];

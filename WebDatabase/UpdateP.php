@@ -5,30 +5,31 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     </head>
     <body style="background-color:#f0f8ff">
-        <form action="/WebDatabase/UpdateProcessV.php" method="get">
-            Title:<input type="text" name="title"><br><br>
+        <form action="/WebDatabase/UpdateProcessP.php" method="get">
+            Name:<input type="text" name="name"><br><br>
+            Surname:<input type="text" name="surname"><br><br>
+            Age:<input type="text" name="age"><br><br>
+            Email:<input type="text" name="email"><br><br>
             <?php
                 $server="localhost";
                 $username="programma";
                 $password="12345";
                 $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
                 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query="SELECT editor.Name FROM editor";
+                $query="SELECT Username FROM speedrunner";
                 $statement=$connection->prepare($query);
                 $statement->execute();
                 $data=$statement->fetchAll();
-                echo "Editor:<select name=publisher>";
+                echo "Speedrunner:<select name=speedrunner>";
                 foreach($data as $rows){
-                    echo "<option>".$rows["Name"]."</option>";
+                    echo "<option>".$rows["Username"]."</option>";
                 }
                 echo "</select><br><br>";
             ?>
-            Publishing Year:<input type="text" name="publishingyear"><br><br>
-            Times Speedrunned:<input type="text" name="timesspeedrunned"><br><br>
             <button type='b' class='btn btn-primary'>Modifica</button>
             <?php
-                $g=$_GET["VideogameU"];
-                echo"<input type='text' name='VideogameU' value='$g' style='display:none;'><br><br>";
+                $g=$_GET["PersonU"];
+                echo"<input type='text' name='PersonU' value='$g' style='display:none;'><br><br>";
             ?>
         </form>
     </body>

@@ -67,5 +67,47 @@
             <input type="checkbox" name="sort">Sort the leaderboard of a specific game<br><br>
             <button type="b" class="btn btn-primary">Filter</button>
         </form>
+        <form action="/WebDatabase/DeleteSR.php" method="get">
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT s.Username,v.Title FROM (speedrun sr JOIN speedrunner s ON sr.Speedrunner=s.Id)JOIN videogame v ON sr.Videogame=v.Id ";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+                echo "Scegliere la speedrun da cancellare:<br>";
+                echo "<select name=SpeedrunD>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Username"]."-".$rows["Title"]."</option>";
+                }
+                echo "</select>";
+            ?>
+            <button class='btn btn-primary'>Cancella</button><br><br>
+        </form>
+        <form action="UpdateSR.php" method="get">
+            <?php
+                $server="localhost";
+                $username="programma";
+                $password="12345";
+                $connection=new PDO("mysql:host=$server;dbname=speedrunning",$username,$password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $query="SELECT s.Username,v.Title FROM (speedrun sr JOIN speedrunner s ON sr.Speedrunner=s.Id)JOIN videogame v ON sr.Videogame=v.Id ";
+                $statement=$connection->prepare($query);
+                $statement->execute();
+                $data=$statement->fetchAll();
+
+                echo "Modifica di una speedrun<br>";
+                echo "<select name=SpeedrunU>";
+                foreach($data as $rows){
+                    echo "<option>".$rows["Username"]."-".$rows["Title"]."</option>";
+                }
+                echo "</select>     ";
+                echo "<button type='b' class='btn btn-primary'>Modifica</button><br><br>";
+            ?>
+        </form>
+        <a href="/WebDatabase/AddSR.php"><button type='b' class='btn btn-primary'>Aggiungi una speedrun</button><br><br></a>
     </body>
 </html>
