@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
+<?php
     $user=$_GET["username"];
     $nationality=$_GET["nationality"];
     $gender=$_GET["gender"];

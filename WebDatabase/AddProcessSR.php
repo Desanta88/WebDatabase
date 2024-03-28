@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
+<?php
     $runner=$_GET["speedrunner"];
     $game=$_GET["videogame"];
     $date=$_GET["date"];

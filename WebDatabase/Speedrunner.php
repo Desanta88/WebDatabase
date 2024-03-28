@@ -1,3 +1,10 @@
+
+<?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
 <html>
     <head>
         <title>Speedrunner</title>

@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
+<?php
     $server="localhost";
     $username="programma";
     $password="12345";

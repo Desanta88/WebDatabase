@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
+<?php
     $name=$_GET["name"];
     $ey=$_GET["establishmentyear"];
     $sales=$_GET["sales"];

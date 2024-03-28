@@ -20,8 +20,7 @@
     
             if(empty($data)==false){
                 $_SESSION["User"]=$username;
-                $_SESSION["pass"]=$password;
-                header("location:/WebDatabase/home.html");
+                header("location:/WebDatabase/home.php");
             }
             else
                 echo "username o password non corretti";

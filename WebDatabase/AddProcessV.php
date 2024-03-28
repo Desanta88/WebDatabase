@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(isset($_SESSION['User'])==false){
+        header("location:/WebDatabase/index.html");
+    }
+?>
+<?php
     $title=$_GET["title"];
     $publishingY=$_GET["publishingyear"];
     $timesSpeedrunned=$_GET["timesspeedrunned"];
